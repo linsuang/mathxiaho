@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>小学计算练习</title>
+</head>
+<body>
+  <h1>小学计算练习</h1>
+  <p id="question"></p>
+  <input type="number" id="answer">
+  <button onclick="checkAnswer()">检查答案</button>
+  <p id="result"></p>
+
+  <script>
+    var num1, num2, operator, correctAnswer;
+
+    function generateQuestion() {
+      num1 = Math.floor(Math.random() * 10) + 1; // 生成1到10之间的随机数
+      num2 = Math.floor(Math.random() * 10) + 1;
+      operator = Math.random() < 0.5 ? "+" : "-"; // 随机选择加法或减法运算符
+      var question = num1 + " " + operator + " " + num2;
+
+      document.getElementById("question").innerHTML = "题目: " + question;
+      document.getElementById("answer").value = ""; // 清空上次的答案
+      document.getElementById("result").innerHTML = ""; // 清空上次的结果
+      document.getElementById("answer").focus(); // 将焦点设置在答案输入框
+    }
+
+    function checkAnswer() {
+      var userAnswer = parseInt(document.getElementById("answer").value);
+
+      if (operator === "+") {
+        correctAnswer = num1 + num2;
+      } else if (operator === "-") {
+        correctAnswer = num1 - num2;
+      }
+
+      if (userAnswer === correctAnswer) {
+        document.getElementById("result").innerHTML = "回答正确！";
+      } else {
+        document.getElementById("result").innerHTML = "回答错误。正确答案是 " + correctAnswer;
+      }
+
+      generateQuestion(); // 生成新题目
+    }
+
+    // 页面加载时生成第一个题目
+    window.onload = function() {
+      generateQuestion();
+    };
+  </script>
+</body>
+</html>
